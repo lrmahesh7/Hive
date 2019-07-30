@@ -1,3 +1,12 @@
-How to drop last 3o days partitions in hive
+1)How to drop last 3o days partitions in hive
 hive --hivevar var_drop_date="$(date -d "30 days ago" +"%Y-%m-%d")" -e ALTER TABLE test DROP IF EXISTS PARTITION (partition_date <= date "${hivevar:var_drop_date}")'
 hive --hivevar var_drop_date="$(date --date '07 days ago' +\%Y-\%m-\%d)" -e 'ALTER TABLE test DROP IF EXISTS PARTITION (partition_date <= date "${hivevar:var_drop_date}")'
+
+2)How partitions are created i.e in which order?
+a)Partitiones are created based on the value of partition
+for example rt=32456,rt=1011,rt=001.
+then partitions are created as fallows.
+
+tablename/rt=001
+tablename/rt=1011
+tablename/rt=32456
