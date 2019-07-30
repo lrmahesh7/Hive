@@ -1,0 +1,3 @@
+How to drop last 3o days partitions in hive
+hive --hivevar var_drop_date="$(date -d "30 days ago" +"%Y-%m-%d")" -e ALTER TABLE test DROP IF EXISTS PARTITION (partition_date <= date "${hivevar:var_drop_date}")'
+hive --hivevar var_drop_date="$(date --date '07 days ago' +\%Y-\%m-\%d)" -e 'ALTER TABLE test DROP IF EXISTS PARTITION (partition_date <= date "${hivevar:var_drop_date}")'
