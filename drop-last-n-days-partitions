@@ -10,3 +10,6 @@ then partitions are created as fallows.
 tablename/rt=001
 tablename/rt=1011
 tablename/rt=32456
+
+3)if we want to rename partition then we can use move command to move one partition to new partition .then that partition column
+value also changed at column level
