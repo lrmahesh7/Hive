@@ -13,3 +13,6 @@ tablename/rt=32456
 
 3)if we want to rename partition then we can use move command to move one partition to new partition .then that partition column
 value also changed at column level
+4) copy file from one cluster to other 
+  step1:connect server which file is present,copy file to /tmp folder and give full permission.
+  step2:connect same server by using sftp and use get filename .it will copy data to local .then use scp to copy file to where which u want.
