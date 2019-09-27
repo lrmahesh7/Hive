@@ -1,0 +1,1 @@
+insert overwrite  table tablename partition(partition_column_name=partition_column_value) select table_name,66,21,number_of_part_files,is_history_build,default_rt_value,default_bsk_value,create_ts, update_ts from stage_table_name;
