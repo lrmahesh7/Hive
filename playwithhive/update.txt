@@ -1,0 +1,25 @@
+SET hive.support.concurrency=true;
+SET hive.enforce.bucketing=true;
+SET hive.exec.dynamic.partition.mode=nonstrict;
+SET hive.txn.manager=org.apache.hadoop.hive.ql.lockmgr.DbTxnManager;
+SET hive.compactor.initiator.on=true;
+SET hive.compactor.worker.threads=1;
+
+2.Restart hive using below commands
+
+sudo service hive-server2 stop
+sudo service hive-server2 start
+
+3.create table hive_dml (emp_id int, first_name string, last_name string) clustered by (emp_id) into 4 buckets stored as orc tblproperties ('transactional'='true');
+
+insert into hive_dml values  
+(1001501,'alaister','briito'),
+(1001502,'anifa','mohammed'), 
+(1001503,'piyush','manish'), 
+(1001504,'vijay','karthik'), 
+(1001505,'narasingh','rao');
+
+select * from hive_dml;
+
+update hive_dml set last_name='yadav' where emp_id=1001505;
+

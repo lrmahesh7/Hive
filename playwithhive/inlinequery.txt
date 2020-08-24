@@ -1,0 +1,81 @@
+SELECT
+
+PARTITION_DATE AS PARTITION_DATE,                                                                                                                                                                               
+
+BILLING_ACCOUNT_NUM AS BILLING_ACCOUNT_NUM,                                                                                                                                                                        
+
+BILLING_ACCOUNT_SYSTEM AS BILLING_ACCOUNT_SYSTEM,                                                                                                                                                                
+
+BILL_SERIAL_NUM AS BILL_SERIAL_NUM,                                                                                                                                                                       
+
+BILL_VERSION_NUM AS BILL_VERSION_NUM,                                                                                                                                                      
+
+CHARGE_CATEGORY AS CHARGE_CATEGORY,                                                                                                                                                         
+
+VAT_IND AS VAT_IND,                                                                                                                                                       
+
+VAT_RATE AS VAT_RATE,                                                                                                                                                     TOTAL_DURATION AS TOTAL_DURATION,                                                                                                                                                                       
+
+'1' AS SUMMARY_LEVEL,                                                                                                                                             
+
+'-1' AS VAT_AMT,                                                                                                                                                      
+
+FILE_KEY AS FILE_KEY,                                                                                                                                                                    
+
+CREATED_DT AS CREATED_DT,                                                                                                                                                                 
+
+UPDATED_DT AS UPDATED_DT,
+
+SUM(cost) AS TOTAL_COST,
+
+COUNT(charge_category) AS total_num,
+
+SUM(duration) AS total_duration,
+
+MIN(charge_date) AS start_date,
+
+MIN(charge_date) AS end_date
+
+from
+
+(select
+
+PARTITION_DATE AS PARTITION_DATE,                                                                                                                                                                              
+
+BILLING_ACCOUNT_NUM AS BILLING_ACCOUNT_NUM,                                                                                                                                                                        
+
+BILLING_ACCOUNT_SYSTEM AS BILLING_ACCOUNT_SYSTEM,                                                                                                                                                                
+
+BILL_SERIAL_NUM AS BILL_SERIAL_NUM,                                                                                                                                                                       
+
+BILL_VERSION_NUM AS BILL_VERSION_NUM,                                                                                                                                                      
+
+CHARGE_CATEGORY AS CHARGE_CATEGORY,                                                                                                                                                        
+
+VAT_IND AS VAT_IND,                                                                                                                                                       
+
+VAT_RATE AS VAT_RATE,                                                                                                                                                     TOTAL_DURATION AS TOTAL_DURATION,                                                                                                                                                                      
+
+'1' AS SUMMARY_LEVEL,                                                                                                                                             
+
+'-1' AS VAT_AMT,                                                                                                                                                       
+
+FILE_KEY AS FILE_KEY,                                                                                                                                                                   
+
+CREATED_DT AS CREATED_DT,                                                                                                                                                                 
+
+UPDATED_DT AS UPDATED_DT,
+
+SUM(cost) AS TOTAL_COST,
+
+COUNT(charge_category) AS total_num,
+
+SUM(duration)AS total_duration,
+
+MIN(charge_date) AS start_date,
+
+MIN(charge_date) AS end_date,ROW_NUMBER() over (Partition BY BILLING_ACCOUNT_NUM,CHARGE_CATEGORY,VAT_RATE,VAT_IND)as rnum
+
+from BILL_SUMMARIES_L1_TEMP_NEW) t
+
+where rnum=1;

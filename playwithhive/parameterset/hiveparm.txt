@@ -1,0 +1,3 @@
+set database=spark;
+set tablename=bucket;
+set name='mahesh';

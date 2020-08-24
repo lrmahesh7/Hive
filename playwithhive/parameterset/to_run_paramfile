@@ -1,0 +1,1 @@
+hive -f parameter.hql -i hiveparam.txt

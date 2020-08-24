@@ -1,0 +1,2 @@
+create table foo(id int,name string)partition by(country string,state string,city string) row format
+ delimited fields terminated by ',';
